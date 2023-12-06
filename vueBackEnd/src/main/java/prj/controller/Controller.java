@@ -1,7 +1,8 @@
 package prj.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import prj.model.OrderDetail;
 import prj.service.OrderDetailService;
@@ -13,7 +14,7 @@ public class Controller {
 
 
     @GetMapping("/findOrders/{page}/{size}")
-    public Page<OrderDetail> findOrders(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
+    public PageInfo<OrderDetail> findOrders(@PathVariable("page") Integer page, @PathVariable("size") Integer size){
         return orderDetailService.findAll(page,size);
     }
 

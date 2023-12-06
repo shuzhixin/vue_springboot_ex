@@ -18,7 +18,7 @@
                     label="操作">
                 <template slot-scope="scope">
                     <el-button @click="edit(scope.row)" type="text" >修改</el-button>
-                    <el-button @click="delete(scope.row)" type="text" >删除</el-button>
+                    <el-button @click="del(scope.row)" type="text" >删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -36,7 +36,7 @@
 <script>
     export default {
         methods: {
-            delete(row){
+            del(row){
                 const _this = this
                 this.$axios.delete('http://localhost:8085/deleteById/'+row.id).then(function(resp){
                     _this.$alert(row.name+'删除成功！', '消息', {
@@ -59,9 +59,9 @@
                 const _this = this
                 this.$axios.get('http://localhost:8085/findOrders/'+(currentPage-1)+'/5').then(function(resp){
                     console.log(resp)
-                    _this.OrderData = resp.data.content
-                    _this.pageSize = resp.data.size
-                    _this.total = resp.data.totalElements
+                    _this.OrderData = resp.data.list
+                    _this.pageSize = resp.data.pageSize
+                    _this.total = resp.data.total
                 })
             }
         },
@@ -77,9 +77,10 @@
         created() {
             const _this = this
             this.$axios.get('http://localhost:8085/findOrders/0/5').then(function(resp){
-                _this.OrderData = resp.data.content
-                _this.pageSize = resp.data.size
-                _this.total = resp.data.totalElements
+                console.log(resp)
+                _this.OrderData = resp.data.list
+                _this.pageSize = resp.data.pageSize
+                _this.total = resp.data.total
             })
         }
     }

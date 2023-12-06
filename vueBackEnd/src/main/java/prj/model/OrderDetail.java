@@ -1,19 +1,23 @@
 package prj.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+
 import java.io.Serializable;
 
-@Entity
-@Table(name="orderdetail")
+@Data
+@TableName("orderdetail")
 public class OrderDetail implements Serializable {
 
-    @Id
-    @Column(name = "id")
+    @TableId(value = "id")
     private int id;
-    @Column(name = "name")
+    @TableField(value = "name")
     private String name;
 
     public void setId(int id) {
